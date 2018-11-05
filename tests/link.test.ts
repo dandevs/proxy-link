@@ -2,13 +2,14 @@ import { proxyLink } from "../src";
 const base = { value: "bar" };
 
 it("Values Linked", () => {
-    const link = proxyLink(base);
+    const link = proxyLink(base, { count: 1 });
 
     link.value = "baz";
     expect(base.value === "baz").toBe(true);
 
     base.value = "foo";
     expect(link.value === "foo").toBe(true);
+    expect(link.count === 1 && (base as any).count === undefined).toBe(true);
 });
 
 it("Functions, Getters & Setters", () => {
