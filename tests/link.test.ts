@@ -15,6 +15,7 @@ it("Values Linked", () => {
     base.value = "foo";
     expect(link.value === "foo").toBe(true);
     expect(link.count === 1 && (base as any).count === undefined).toBe(true);
+    expect(link["original-object"] === base).toEqual(true);
 });
 
 it("Functions, Getters & Setters", () => {

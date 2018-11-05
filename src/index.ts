@@ -1,5 +1,5 @@
 export function proxyLink<T0 extends object, T1 extends object>(source: T0, modifiers: T1 & ThisType<T0 & T1> = {} as any) {
-    const proxy = new Proxy({}, {
+    const proxy = new Proxy({"original-object": source}, {
         get(obj: object, property: string) {
             if (property in obj)
                 return obj[property];
@@ -15,7 +15,7 @@ export function proxyLink<T0 extends object, T1 extends object>(source: T0, modi
 
             return true;
         },
-    }) as T0 & T1;
+    }) as T0 & T1 & { "original-object": T0 };
 
     for (let property of Object.getOwnPropertyNames(modifiers)) {
         const descriptor        = Object.getOwnPropertyDescriptor(modifiers, property);
