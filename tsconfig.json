@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "noImplicitThis": true,
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "./dist",
+        "lib": [
+            "es5",
+            "es6",
+            "dom"
+        ]
+    },
+
+    "typeAcquisition": {
+        "enable": true
+    }
+}
