@@ -14,17 +14,9 @@ it("Values Linked", () => {
 
 it("Functions, Getters & Setters", () => {
     const link = proxyLink(base, {
-        get getter() {
-            return this.value + "!";
-        },
-
-        set setter(v: string) {
-            this.value = v;
-        },
-
-        exec() {
-            return this.getter + "?";
-        },
+        get getter() { return this.value + "!"; },
+        set setter(v: string) { this.value = v; },
+        exec() { return this.getter + "?"; },
     });
 
     link.setter = "woof";
