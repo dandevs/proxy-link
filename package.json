@@ -1,4 +1,16 @@
 {
+  "name": "proxy-link",
+  "version": "0.0.1",
+  "license": "UNLICENSE",
+  "homepage": "https://github.com/dandevs/proxy-link",
+  "keywords": ["proxy", "object", "link"],
+  "scripts": {
+    "build": "tsc -p tsconfig.prod.json",
+    "prepublish": "npm run build"
+  },
+
+  "main": "dist/index.js",
+
   "devDependencies": {
     "@types/jest": "^23.3.9",
     "jest": "^23.6.0",
