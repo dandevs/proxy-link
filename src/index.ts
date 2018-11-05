@@ -1,27 +1,27 @@
-export function proxyLink<T0 extends object, T1 extends object>(target: T0, other: T1 & ThisType<T0 & T1> = {} as any) {
+export function proxyLink<T0 extends object, T1 extends object>(source: T0, modifiers: T1 & ThisType<T0 & T1> = {} as any) {
     const proxy = new Proxy({}, {
         get(obj: object, property: string) {
             if (property in obj)
                 return obj[property];
 
-            return target[property];
+            return source[property];
         },
 
         set(obj: object, property: string, value: any) {
             if (property in obj)
                 obj[property] = value;
             else
-                target[property] = value;
+                source[property] = value;
 
             return true;
         },
     }) as T0 & T1;
 
-    for (let property of Object.getOwnPropertyNames(other)) {
-        const descriptor        = Object.getOwnPropertyDescriptor(other, property);
+    for (let property of Object.getOwnPropertyNames(modifiers)) {
+        const descriptor        = Object.getOwnPropertyDescriptor(modifiers, property);
         const proxyDescriptor   = Object.assign({}, descriptor);
         const hasGetterOrSetter = descriptor.get || descriptor.set;
-        const isFunc            = typeof other[property] == "function";
+        const isFunc            = typeof modifiers[property] == "function";
 
         if (hasGetterOrSetter) {
             if (proxyDescriptor.get)
@@ -34,7 +34,7 @@ export function proxyLink<T0 extends object, T1 extends object>(target: T0, othe
         }
 
         else if (isFunc) {
-            proxyDescriptor.value = other[property];
+            proxyDescriptor.value = modifiers[property];
             Object.defineProperty(proxy, property, proxyDescriptor);
         }
         else
