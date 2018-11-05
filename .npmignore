@@ -1,2 +1,5 @@
 tests
 tsconfig.*
+yarn.lock
+tslint.json
+wallaby.js
