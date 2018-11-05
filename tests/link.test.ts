@@ -1,19 +1,18 @@
 import { proxyLink } from "../src";
-
-const foo = { value: "bar" };
+const base = { value: "bar" };
 
 it("Values Linked", () => {
-    const link = proxyLink(foo);
+    const link = proxyLink(base);
 
     link.value = "baz";
-    expect(foo.value === "baz").toBe(true);
+    expect(base.value === "baz").toBe(true);
 
-    foo.value = "foo";
+    base.value = "foo";
     expect(link.value === "foo").toBe(true);
 });
 
-it("Combined", () => {
-    const link = proxyLink(foo, {
+it("Functions, Getters & Setters", () => {
+    const link = proxyLink(base, {
         get getter() {
             return this.value + "!";
         },
@@ -26,4 +25,9 @@ it("Combined", () => {
             return this.getter + "?";
         },
     });
+
+    link.setter = "woof";
+    expect(base.value === "woof").toBe(true);
+    expect(link.getter === base.value + "!").toBe(true);
+    expect(link.exec() === "woof!?").toBe(true);
 });
