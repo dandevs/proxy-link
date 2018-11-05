@@ -1,5 +1,10 @@
 import { proxyLink } from "../src";
-const base = { value: "bar" };
+const base = {
+    value: "bar",
+    deeper: {
+        value: "okei",
+    },
+ };
 
 it("Values Linked", () => {
     const link = proxyLink(base, { count: 1 });

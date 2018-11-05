@@ -21,7 +21,6 @@ export function proxyLink<T0 extends object, T1 extends object>(source: T0, modi
         const descriptor        = Object.getOwnPropertyDescriptor(modifiers, property);
         const proxyDescriptor   = Object.assign({}, descriptor);
         const hasGetterOrSetter = descriptor.get || descriptor.set;
-        const isFunc            = typeof modifiers[property] == "function";
 
         if (hasGetterOrSetter) {
             if (proxyDescriptor.get)
@@ -30,11 +29,6 @@ export function proxyLink<T0 extends object, T1 extends object>(source: T0, modi
             if (proxyDescriptor.set)
                 proxyDescriptor.set = proxyDescriptor.set.bind(proxy);
 
-            Object.defineProperty(proxy, property, proxyDescriptor);
-        }
-
-        else if (isFunc) {
-            proxyDescriptor.value = modifiers[property];
             Object.defineProperty(proxy, property, proxyDescriptor);
         }
         else
