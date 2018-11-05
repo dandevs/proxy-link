@@ -17,10 +17,12 @@ it("Functions, Getters & Setters", () => {
         get getter() { return this.value + "!"; },
         set setter(v: string) { this.value = v; },
         exec() { return this.getter + "?"; },
+        getValue() { return this.value; },
     });
 
     link.setter = "woof";
     expect(base.value === "woof").toBe(true);
     expect(link.getter === base.value + "!").toBe(true);
     expect(link.exec() === "woof!?").toBe(true);
+    expect(link.getValue() === "woof").toEqual(true);
 });
