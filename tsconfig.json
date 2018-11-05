@@ -16,6 +16,11 @@
         ]
     },
 
+    "include": [
+        "src/**/*",
+        "tests/**/*"
+    ],
+
     "typeAcquisition": {
         "enable": true
     }
